@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Label, Select } from 'semantic-ui-react';
+import { Form, Label, Grid } from 'semantic-ui-react';
 // import styled from 'styled-components';
 // import theme from './theme';
 
@@ -26,45 +26,47 @@ const SearchBar = (props) => {
   );
 
   return (
-    <Form 
-      onSubmit={onSubmit}
-      style={{ marginBottom: '3em' }}
-    >
-      <Form.Group>
-        <Form.Field>
-          <select 
-            name='lang'
-            value={lang} 
-            onChange={onChange}
-            placeholder='사용 언어'
-          >
-            {Options}
-          </select>
-        </Form.Field>
-        <Form.Field>
-          <Form.Input
-            placeholder='한글 단어'
-            onChange={onChange}
-            name='word'
-            value={word}
-            error={wordError}
+    <Grid centered>
+      <Form 
+        onSubmit={onSubmit}
+        style={{ marginBottom: '3em' }}
+      >
+        <Form.Group>
+          <Form.Field>
+            <select 
+              name='lang'
+              value={lang} 
+              onChange={onChange}
+              placeholder='사용 언어'
+            >
+              {Options}
+            </select>
+          </Form.Field>
+          <Form.Field>
+            <Form.Input
+              placeholder='한글 단어'
+              onChange={onChange}
+              name='word'
+              value={word}
+              error={wordError}
+            />
+            { wordError &&          
+              <Label basic color='red' pointing>
+                한글 단어를 입력해주세요.
+              </Label>
+            }
+          </Form.Field>
+          <Form.Button 
+            content='Cook 🍳' 
+            inverted color='green'
+            type='submit'
+            disabled={
+              !word || !lang
+            }
           />
-          { wordError &&          
-            <Label basic color='red' pointing>
-              한글 단어를 입력해주세요.
-            </Label>
-          }
-        </Form.Field>
-        <Form.Button 
-          content='Cook 🍳' 
-          inverted color='green'
-          type='submit'
-          disabled={
-            !word || !lang
-          }
-        />
-      </Form.Group>
-    </Form>
+        </Form.Group>
+      </Form>
+    </Grid>
   );
 };
 
